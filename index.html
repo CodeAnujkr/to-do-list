@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    th {
+        padding: 0 40px;
+        border: 2px solid black;
+    }
+
+    .to-do-list {
+        border: 2px solid black;
+        width: 50%;
+        height: 150px;
+        box-shadow: 5px 5px 5px 5px;
+        border-radius: 20px;
+    }
+    span{
+        padding: 0 140px
+    }
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <center>
+        <div class="to-do-list">
+            <h1>ADD TO DO LIST</h1>
+            <input type="text" name="" id="teskid">
+            <button id="teskbutton">ADD</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="tabletb">
+            <table>
+                <tr id="teskbar">
+
+                </tr>
+            </table>
+        </div>
+
+    </center>
+</body>
+<script>
+    const teskid = document.getElementById('teskid')
+    const teskbutton = document.getElementById('teskbutton')
+    const teskbar = document.getElementById('teskbar')
+    teskbutton.addEventListener('click', function () {
+        const teskben = teskid.value.trim();
+        if (teskben) {
+            const td = document.createElement('td')
+            td.innerHTML = `<span>${teskben}</span>
+            <button class="edit-btn">EDIT</button>
+            <button class="delete-btn">DELETE</button>
+            <br>`
+            teskbar.appendChild(td)
+            teskid.value = ''
+            
+            const editben = td.querySelector('.edit-btn')
+            editben.addEventListener('click', function () {
+                const newTask = prompt('Enter new task', teskben)
+                if (newTask && newTask.trim()) {
+                    td.querySelector('span').textContent = newTask;
+                }
+            })
+
+            const deleteBtn = td.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', function () {
+                teskbar.removeChild(td);
+            });
+        } else {
+            alert("Please enter a task.");
+        }
+    })
+   </script>
